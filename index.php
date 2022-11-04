@@ -12,7 +12,19 @@ $cover_image = 'http://www.androidguys.com/wp-content/uploads/2016/01/summer-sun
 
 //php code here
 
+$ran_image_num = rand(0, 3);
+$image_to_display = $random_images[$ran_image_num];
+
+// Define Cookies here
+
+setcookie('div1_100vw', 'no', time() + 84600);
+setcookie('div2_100vw', 'no', time() + 84600);
+setcookie('div3_100vw', 'no', time() + 84600);
+setcookie('div4_100vw', 'no', time() + 86400);
+
 ?>
+
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -71,24 +83,177 @@ table {
 
 /* css here */
 
+.divitem {
+    height: 25vh;
+}
+
+.divitem:hover {
+    cursor: pointer;
+}
+
+#div1 {
+    background-image: url(http://www.androidguys.com/wp-content/uploads/2016/01/summer-sunset-293095.jpg);
+    background-size: cover;
+    width: 25%;
+    transition: width 0.4s;
+}
+
+#div1.div-clicked {
+    width: 100%;
+}
+
+#div2 {
+    background: orange;
+    width: 75%;
+    transition: width 0.4s;
+}
+
+#div2.div-clicked {
+    width: 100%;
+}
+
+#div2 img {
+    height: 70%;
+    display: block;
+    margin: auto;
+}
+
+#div3 {
+    background-color: blue;
+    width: 50%;
+    transition: background-color 0.4s, width 0.4s;
+}
+
+#div3.div-clicked {
+    width: 100%;
+}
+
+#div3.bg-red {
+    background-color: red;
+}
+
+#div4 {
+    background: yellow;
+    padding-top: 10px;
+    width: 90%;
+    transition: width 0.4s;
+    text-align: center;
+    font-size: 28px;
+}
+
+#div4.div-clicked {
+    width: 100%;
+}
+
+
+@media (max-width:600px) {
+    #div3, #div4 {
+        display: none;
+    }
+
+    #div1, #div2 {
+        height: 50vh;
+    }
+}
+
 </style>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 <script>
 
 //javascript code here
+
+function divWidthToggle(x) {
+    document.getElementById(x).classList.toggle("div-clicked")
+}
+
+function div3Toggle(x) {
+    document.getElementById(x).classList.toggle("bg-red")
+    divWidthToggle(x)
+}
 	
 </script>
 </head>
 <body>
 <div id="wrapper">
-	<div id="div1" class="divitem">
+<!-- DIV1 -->
+<?php 
+if ($_COOKIE['div1_100vw'] == 'no' ) {
+	echo '<div id="div1" class="divitem" onclick="divWidthToggle(this.id)">
+	</div>';} else {
+    echo '<div id="div1" class="divitem div-clicked" onclick="divWidthToggle(this.id)">
+</div>';}
+?>
+
+
+<!-- DIV2 -->
+<?php  
+if ($_COOKIE['div2_100vw'] == 'no' ) {  
+    echo '<div id="div2" class="divitem" onclick="divWidthToggle(this.id)">
+
+    <img src="'.$image_to_display.'">
+
+</div>';
+} else {
+    echo '<div id="div2" class="divitem div-clicked" onclick="divWidthToggle(this.id)">
+
+    <img src="'.$image_to_display.'">
+
+</div>';
+}
+
+?>
+<!-- DIV3 -->
+
+    <?php 
+if ($_COOKIE['div3_100vw'] == 'no' ) {
+	echo '<div id="div3" class="divitem" onclick="div3Toggle(this.id)">
+	</div>';} else {
+    echo '<div id="div3" class="divitem div-clicked bg-red" onclick="div3Toggle(this.id)">
+</div>';}
+?>
+
+	<!-- <div id="div3" class="divitem" onclick="div3Toggle(this.id)"> -->
 	</div>
-	<div id="div2" class="divitem">
-	</div>
-	<div id="div3" class="divitem">
-	</div>
-	<div id="div4" class="divitem">
-	</div>
+
+<!-- DIV4 -->
+
+<?php
+if ($_COOKIE['div4_100vw'] == 'no' ) {
+	echo '<div id="div4" class="divitem" onclick="divWidthToggle(this.id)">';
+
+            $num = -1;
+            for ($x = 1; $x <= 9; $x++) { 
+              if ($x <= 5) {
+              $num = $num + 2;
+              echo "$num "  ;
+              } else {
+              $num = $num -2;
+              echo "$num " ;
+              }
+            }
+
+	echo '</div>';
+} 
+    
+    else {
+        echo '<div id="div4" class="divitem div-clicked" onclick="divWidthToggle(this.id)">';
+
+            $num = -1;
+            for ($x = 1; $x <= 9; $x++) { 
+              if ($x <= 5) {
+              $num = $num + 2;
+              echo "$num "  ;
+              } else {
+              $num = $num -2;
+              echo "$num " ;
+              }
+            }
+	echo '</div>';
+    }
+    ?>
+
 </div>
+
+
 </body>
 </html>
