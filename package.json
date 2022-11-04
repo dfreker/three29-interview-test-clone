@@ -1,0 +1,22 @@
+{
+  "name": "interviewtest",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Interview assessment test. For more information see https://github.com/three29/interviewtest",
+  "scripts": {
+    "test": "npx cypress open",
+    "serve": "php -S localhost:8080 -t ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/three29/interviewtest.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/three29/interviewtest/issues"
+  },
+  "homepage": "https://github.com/three29/interviewtest#readme",
+  "devDependencies": {
+    "cypress": "^10.10.0"
+  }
+}
